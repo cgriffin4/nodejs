@@ -9,5 +9,5 @@ var webServer = http.createServer(
 	}
 );
 
-webServer.listen(1337, "127.0.0.1");
-console.log('Server running at http://127.0.0.1:1337/');
+webServer.listen(80, "127.0.0.1");
+console.log('Server running at http://127.0.0.1:80/');

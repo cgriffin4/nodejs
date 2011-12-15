@@ -121,14 +121,15 @@ function dispatch(req, res) {
 		res.writeHead(200, {"Content-Type": "text/html"});
 		res.end(content, "utf-8");
     };
-    
-    res.writeHead(200, {"Content-Type": "text/html"});
-		res.end("content2", "utf-8");
 
     var urlparts = url.parse(req.url);
     
     // TODO validate req.url
     if (urlparts.pathname == "/getentry") {
+    	
+    res.writeHead(200, {"Content-Type": "text/html"});
+		res.end("content2", "utf-8");
+		
 		// Query MongoLab
 	 	query("math", {"user":{"$exists": true}}, function (err, docs) {
 		    if (err) {

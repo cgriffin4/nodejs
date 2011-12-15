@@ -123,7 +123,7 @@ function dispatch(req, res) {
     };
     
     res.writeHead(200, {"Content-Type": "text/html"});
-		res.end("content", "utf-8");
+		res.end("content2", "utf-8");
 
     var urlparts = url.parse(req.url);
     

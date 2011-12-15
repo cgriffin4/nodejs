@@ -130,12 +130,10 @@ function dispatch(req, res) {
 		// Query MongoLab
 	 	query("math", {"user":{"$exists": true}}, function (err, docs) {
 		    if (err) {
-			    res.writeHead(200, {"Content-Type": "text/html"});
-				res.end("error:" + err, "utf-8");
-				console.log("Query error", err);
+				renderHtml("Query error : " + err);
 				return;
 		    }
-	 	    renderHtml(docs[0].time);
+	 	    renderHtml(JSON.stringify(docs));
 		});
     } else if (urlparts.pathname == "/addentry") {
 		var querystring = urlparts.query.split("&");

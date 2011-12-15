@@ -135,7 +135,7 @@ function dispatch(req, res) {
 				console.log("Query error", err);
 				return;
 		    }
-	 	    renderHtml(docs);
+	 	    renderHtml(docs[0].time);
 		});
     } else if (urlparts.pathname == "/addentry") {
 		var querystring = urlparts.query.split("&");

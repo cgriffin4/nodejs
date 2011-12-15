@@ -56,8 +56,6 @@ function initializeDb() {
 //
 function serverCallback(req, res) 
 {
-	res.writeHead(200, {"Content-Type": "text/html"});
-		res.end("content", "utf-8");
     try {
 	console.log("http request received from: " +
 		    req.connection.remoteAddress +
@@ -123,6 +121,9 @@ function dispatch(req, res) {
 		res.writeHead(200, {"Content-Type": "text/html"});
 		res.end(content, "utf-8");
     };
+    
+    res.writeHead(200, {"Content-Type": "text/html"});
+		res.end("content", "utf-8");
 
     var urlparts = url.parse(req.url);
     

@@ -123,20 +123,19 @@ function dispatch(req, res) {
     };
 
     var urlparts = url.parse(req.url);
+    var pathnameparts = urlparts.pathname.split("/");
     
-    // TODO validate req.url
-    if (urlparts.pathname == "/getentry") {
-		
-		// Query MongoLab
-	 	query("math", {"user":{"$exists": true}}, function (err, docs) {
-		    if (err) {
-				renderHtml("Query error : " + err);
-				return;
-		    }
-	 	    renderHtml(JSON.stringify(docs));
-		});
-    } else if (urlparts.pathname == "/addentry") {
-		var querystring = urlparts.query.split("&");
+    if (pathnameparts[1] == "get") {
+    	query(pathnameparts[2], {}, function (err, docs) {
+    		if (err) {
+    			renderHtml("Query error:" + err);
+    			return;
+    		}
+    		
+    		renderHtml(JSON.stringify(docs));
+    	});
+    } else if (pathnameparts[1] == "set") {
+    	var querystring = urlparts.query.split("&");
 		var value = "";
 		var patt = /user=/;
 		querystring.forEach(function (item) {
@@ -149,7 +148,7 @@ function dispatch(req, res) {
 		if (value == "") {
 		    renderHtml("query malformed: " + urlparts.query);
 		} else {
-		    insert ("math", {"user": value}, function (err, docs) {
+		    insert (pathnameparts[2], {"user": value}, function (err, docs) {
 			if (err) {
 			    console.log("Insert error", err);
 			    return;
@@ -165,7 +164,7 @@ function dispatch(req, res) {
 	
 		fs.readFile(filen, function(error, content) {
 		    if (error) {
-				serverError(500);
+				serverError(404, "Page not found.");
 		    } else {
 				renderHtml(content);
 		    }

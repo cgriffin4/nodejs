@@ -11,8 +11,7 @@ var requestHandlers = require("./requestHandlers");
 //build possible paths
 var handle = {};
 handle["/math/get"] = requestHandlers.math.get;
-handle["/"] = requestHandlers.test;
-
+handle["/math/put"] = requestHandlers.math.put;
 
 //
 // Start running here.
